@@ -39,12 +39,6 @@ def solution(input):
 
 ---
 
-## Edge Cases Handled
-
-[List specific anomalous inputs tested, such as empty data structures, extreme values, or constraint boundaries, and how the code accounts for them.]
-
----
-
 ## Post-Mortem
 
 [Document errors, specific bugs encountered during debugging, and primary takeaways for future pattern recognition.]

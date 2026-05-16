@@ -46,12 +46,6 @@ class Solution:
 
 ---
 
-## Edge Cases Handled
-
-- None explictly handled.
-
----
-
 ## Post-Mortem
 
 - Python's built-in list operations (e.g. `+` and `extend()`) are highly optimized. Whenever a problem requires direct copying or appending, we should prioritize using these standard library tools over writing custom loops.
