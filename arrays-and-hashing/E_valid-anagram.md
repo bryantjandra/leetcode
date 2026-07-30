@@ -61,3 +61,17 @@ class Solution:
 ## Post-Mortem
 
 - When dealing with character frequencies where the character set is fixed and small (26 lowercase English characters or 256 ASCII characters), a fixed size array is faster and more memory-efficient than a HashMap. Arrays avoid the overhead of computing hash functions and resolving collisions.
+
+
+## Follow-Up Question on LC
+
+- What if the inputs contain Unicode characters? How would you adapt your solution to such a case?
+
+- Instead of using a fixed-size array of length 26, because the input could contain an arbitrary amount of unique characters, I would instead use a hashmap. A hashmap would only store the counts of the characters that are actually present and we don't need to worry about instantiating the size of the fixed-size array. 
+
+- Time complexity will remain the same, but space complexity will degrade to $O(k)$ where k is the amount of unique characters across both strings. This is because we can no longer claim a fixed size of 26 anymore.
+
+
+## Revisited 
+
+Count: 1
