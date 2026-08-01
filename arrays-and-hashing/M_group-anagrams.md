@@ -55,4 +55,9 @@ class Solution:
 ## Post-Mortem
 
 - myDict.values() returns a view object and not a list, It must be explicitly casted into a list before returning using `list()`.
-- To calculate total space complexity, we ensure we add up the total space required for all keys with the total space required for all values.
+- Total space = space for keys + space for values. Keys: at most n distinct keys, each a sorted string of length k. Values: the value lists collectively hold every input string exactly once — n strings of length k. Thus, `n*k` + `n*k` = `n*k`.
+
+
+## Revisited 
+
+Count: 1
