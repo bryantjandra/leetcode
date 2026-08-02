@@ -60,30 +60,33 @@ class Solution:
 - heapq.heappop(max_heap) to remove and return the smallest element in $O(log n)$ time.
 - $O(n)$ solution utilizes a more complex bucket sort algorithm. More details are shown below.
 
-1. Bucket sort works here because the frequency of each unique element is bounded and predictable (each frequencies can only range from 1-n), and thus we can use it as an index. 
+1. Bucket sort works here because the frequency of each unique element is bounded and predictable (each frequencies can only range from 1-n), and thus we can use it as an index. 
 
-2. The values at each index will be a list of the unique numbers in nums array that each have a frequency matching that index!
+2. We can have a frequency array where the index is the count, and the values at each index will be a list of the numbers in nums array that each have a frequency matching that index. We can know the length of the frequency array, because the max frequency any number in nums array can have is actually the length of the nums array. And thus, the we can instantiate the length of our frequency array to be the length of nums.
 
-3. All we then have to do is iterate from the end of our buckets array all the way to the front, and collect elements from every single bucket, up until we have k elements.
+3. All we then have to do is iterate from the end of our frequency array all the way to the front, and collect elements from every single bucket, up until we have k elements. The time complexity for this is $O(n)$, which answers the follow-up question for this problem.
 
 ```python
-from collections import Counter
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        counter = Counter(nums)
+        freqArr = [[] for i in range(len(nums) + 1)]
+        myDict = {}
+        for num in nums:
+            myDict[num] = myDict.get(num, 0) + 1
+        
 
-        # n+1 buckets (index 0 unused), each bucket is a list
-        # since multiple numbers can share the same frequency
-        buckets = [[] for _ in range(len(nums) + 1)]
-
-        for num, count in counter.items():
-            buckets[count].append(num)
-
-        # read from right to left, collect until we have k elements
+        for key, val in myDict.items():
+            freqArr[val].append(key)
+        
         res = []
-        for i in range(len(buckets) - 1, 0, -1):
-            for num in buckets[i]:
-                res.append(num)
+        for i in range(len(nums), 0, -1):
+            for n in freqArr[i]:
+                res.append(n)
                 if len(res) == k:
                     return res
+
 ```
+
+## Revisited 
+
+Count: 1
