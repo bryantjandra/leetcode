@@ -65,3 +65,33 @@ class Solution:
 
 N/A.
 
+## Follow-Up Question on LC
+
+- How to optimize to $O(1)$ space complexity? --> The output array does not count as extra space for space complexity analysis.
+
+```python
+class Solution:
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        result = [1] * len(nums)
+        for i in range(1, len(nums)):
+            result[i] = nums[i-1] * result[i-1]
+
+        suffix = 1
+        for i in range(len(nums) - 1, -1, -1):
+            result[i] = result[i] * suffix
+            suffix = suffix * nums[i]
+
+        return result
+```
+
+- In order to optimize to $O(1)$ space complexity, we remove the use of the two arrays (prefix and suffix). We instead utilize the actual output array as a substitute. 
+
+- We first calculate the prefix products like how we would normally do, but then we just store them directly in our output array. We then loop backwards like how we would calculate our suffix product array, but we also keep track of a running suffix variable. 
+
+- This running suffix variable keeps track of the product of all the elements to the right so far, as we are iterating backwards through the `nums` array.
+
+- We then ensure we update this running suffix variable as we loop backwards, and we also ensure we update the output array (multiply the prefix product with the suffix variable in order to get the product of all elements except for this specific element). 
+
+## Revisited 
+
+Count: 1
