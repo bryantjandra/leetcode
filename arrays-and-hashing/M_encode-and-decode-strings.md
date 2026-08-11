@@ -18,11 +18,13 @@ N/A.
 
 The naive approach of just using plain delimiters (e.g. `.`) to join strings will break as soon as one of the strings actually contain that delimiter.
 
-We instead use a strategy called: **length-prefix encoding**. Before each string, we write its character count followed by a `#` seperator. For example, `["Hello", "World"]` becomes `"5#hello5#world"`. This way, during decoding we never scan for the end of a word as we know precisely how long each word is. We can thus directly use index arithmetic to obtain the original string. We still need the delimiter `#` because the amount of digitis used to represent the length could be any number with any amount of digits. The `#` functions acts as a terminator for the amount of digits for the length.
+We instead use a strategy called: **length-prefix encoding**. Before each string, we write its character count followed by a `#` seperator. For example, `["Hello", "World"]` becomes `"5#hello5#world"`. This way, during decoding we never scan for the end of a word as we know precisely how long each word is. We can thus directly use index arithmetic to obtain the original string. We still need the delimiter `#` because the amount of digitis used to represent the length could be any number with any amount of digits. The `#` acts as a boundary between the substring used to represent the length of the word and the substring used to represent the actual word.
+
+
 
 `Encode`: concatenate every string into one long string. Each string is first prepended by the length of the string + a `#` delimiter.
 
-`Decode`: We utilize two pointers: i and j. i marks the start of the current length-prefix. j will iterate as long as it doesn't encounter a `#` yet. If it does, this means `s[i:j]` will be the length number for this current string. We then slice exactly `s[i:j]` characters starting at `j+1` because j is currently at `#` and we append it to the `decodedStr` array. We also then make sure to update the `i` pointer to right after this string slice such that it's positioned right at the start of the next string's length-prefix.
+`Decode`: We utilize two pointers: i and j. i marks the start of the current length-prefix. j will iterate as long as it doesn't encounter a `#` yet. If it does, this means `s[i:j]` is the substring that represents the length for this current word. We then slice exactly `s[i:j]` characters starting at `j+1` because j is currently at `#` and we append it to the `decodedStr` array. We also then make sure to update the `i` pointer to right after this string slice such that it's positioned right at the start of the next string's length-prefix.
 
 ---
 
@@ -78,3 +80,8 @@ class Codec:
 - Initially assumed the length for strings was always going to be one digit. This was wrong and it was fixed by using the two-pointer strategy to obtain the actual true length of the strings.
 - When encoding/decoding data, do not just rely solely on a plain delimiter, unless we can guarantee that delimiter never exists in the data.
 - **Length-prefix** is the standard approach for these type of problems as this way, the decoder can just use index arithmetic to obtain the original string instead of scanning every character.
+
+
+## Revisited 
+
+Count: 1
