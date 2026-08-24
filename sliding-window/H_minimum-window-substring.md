@@ -47,8 +47,7 @@ class Solution:
 
 - The above solution works and it is $O(n+m)$, but it's $O(52*n + m)$
 - Below is how it can be improved using a smarter approach:
-    - Two variables are used: (1) need --> contains the amount of distinct characters in `t`. (2) have --> contains the amount of characters satisfied (more than or equal to the frequency for that character in `t`, with the caveat that that character actually exists in `t`) in our sliding window. 
-
+    - Two variables are used: (1) need --> contains the amount of distinct characters in `t`. (2) have --> contains the amount of characters in t that are satisfied (what we mean by satisfied is: the frequency of this specific character in our sliding window is more than or equal to the frequency for this character in `t`, with the caveat that this character actually exists in `t`).
 
 
 ```python
@@ -59,7 +58,6 @@ class Solution:
         
         min_window_size = float('inf')
         res = ""
-
 
         need = 0
 
@@ -99,9 +97,6 @@ class Solution:
     #             return False
         
     #     return True
-
-
-    
     
     def mapLetterToIndex(self, letter):
         if (letter >= 'A' and letter <= 'Z'):
@@ -110,3 +105,8 @@ class Solution:
             return ord(letter) - ord('a') + 26
  
 ```
+
+
+## Revisited 
+
+Count: 1
